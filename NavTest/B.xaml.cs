@@ -17,9 +17,6 @@ using Windows.UI.Xaml.Navigation;
 
 namespace NavTest
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class B : Page
     {
         public B()
@@ -27,14 +24,36 @@ namespace NavTest
             this.InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            App.Frame.Navigate(typeof(A));
+            MyParameterTextBox.Text = DateTime.Now.ToString("ss");
+            MyTextBlock.Text = $"Mode:{e.NavigationMode}";
+            MyParameterTextBlock.Text = $"({e.Parameter})";
+            MyBackStackTextBlock.Text = string.Join(" > ", App.NavigationService.BackStack.Select(x => $"{x.SourcePageType.Name}:({x.Parameter})"));
+            MyForeStackTextBlock.Text = string.Join(" > ", App.NavigationService.ForwardStack.Select(x => $"{x.SourcePageType.Name}:({x.Parameter})"));
         }
 
-        private void GoBack(object sender, RoutedEventArgs e)
+        private void MyParameterTextBox_KeyDown(object sender, KeyRoutedEventArgs e)
         {
-            App.Frame.GoBack();
+            if (e.Key == Windows.System.VirtualKey.Enter)
+            {
+                Go_Clicked(null, null);
+            }
+        }
+
+        private void GoBack_Clicked(object sender, RoutedEventArgs e)
+        {
+            App.NavigationService.GoBack();
+        }
+
+        private void Go_Clicked(object sender, RoutedEventArgs e)
+        {
+            App.NavigationService.GotoA(MyParameterTextBox.Text);
+        }
+
+        private void GoForward_Clicked(object sender, RoutedEventArgs e)
+        {
+            App.NavigationService.GoForward();
         }
     }
 }

@@ -101,7 +101,9 @@
     <Compile Include="B.xaml.cs">
       <DependentUpon>B.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\KeyboardService.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
