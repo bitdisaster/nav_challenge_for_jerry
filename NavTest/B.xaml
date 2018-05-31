@@ -10,10 +10,23 @@
     NavigationCacheMode="Enabled">
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock Text="B" FontSize="42" />
-            <TextBox Text="" Width="100" />
-            <Button Content="GoTo A" Click="Button_Click" />
-            <Button Content="Go Back" Click="GoBack" />
+            <TextBlock Text="This is page B" FontSize="24" HorizontalAlignment="Center" />
+            <TextBlock Text="Mode" FontSize="16" x:Name="MyTextBlock" HorizontalAlignment="Center" />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="BackStack" FontSize="24" Foreground="Green" x:Name="MyBackStackTextBlock" VerticalAlignment="Center" />
+                <TextBlock Text="[B:" FontSize="32" Margin="8,0,0,0" />
+                <TextBlock Text="Parameter" FontSize="32" Foreground="Orange" x:Name="MyParameterTextBlock" />
+                <TextBlock Text="]" FontSize="32" Margin="0,0,8,0" />
+                <TextBlock Text="ForeStack" FontSize="24" Foreground="Green" x:Name="MyForeStackTextBlock" VerticalAlignment="Center" />
+            </StackPanel>
+            <TextBox Header="Cache value" Text="" Width="300" />
+            <RelativePanel>
+                <Button Content="" FontFamily="Segoe MDL2 Assets" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.LeftOf="MyParameterTextBox" Margin="16" Click="GoBack_Clicked" />
+                <TextBox RelativePanel.AlignHorizontalCenterWithPanel="True" Header="Parameter to send:" Text="" Width="300" x:Name="MyParameterTextBox" KeyDown="MyParameterTextBox_KeyDown" />
+                <Button Content="Go" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.RightOf="MyParameterTextBox" Margin="16" x:Name="GoButton" Click="Go_Clicked" />
+                <Button Content="" FontFamily="Segoe MDL2 Assets" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.RightOf="GoButton" Click="GoForward_Clicked" />
+            </RelativePanel>
         </StackPanel>
+
     </Grid>
 </Page>
